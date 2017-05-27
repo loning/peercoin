@@ -32,19 +32,11 @@ but you can get the current version from http://developer.apple.com
 
 git clone git@github.com:ppcoin/ppcoin.git ppcoin
 
-2.  Download and install MacPorts from http://www.macports.org/
+2.  Brew
 
-2a. (for maximum compatibility with 32-bit installs)
-    Edit /opt/local/etc/macports/macports.conf and uncomment "build_arch i386"
+brew install automake berkeley-db4 libtool boost --c++11 miniupnpc openssl pkg-config protobuf qt libevent
 
-3.  Install dependencies from MacPorts
-
-sudo port install boost db48 openssl miniupnpc
-
-Optionally install qrencode (and set USE_QRCODE=1):
-sudo port install qrencode
-
-4.  Now you should be able to build bitcoind:
+4.  Now you should be able to build ppcoind:
 
 cd ppcoin/src
 make -f makefile.osx
