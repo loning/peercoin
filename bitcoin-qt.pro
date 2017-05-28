@@ -4,7 +4,7 @@ VERSION = 0.6.3.0
 INCLUDEPATH += src src/json src/qt
 DEFINES += QT_GUI BOOST_THREAD_USE_LIB BOOST_SPIRIT_THREADSAFE
 CONFIG += no_include_pwd
-
+# CONFIG += c++11
 # for boost 1.37, add -mt to the boost libraries 
 # use: qmake BOOST_LIB_SUFFIX=-mt
 # for boost thread win32 with _win32 sufix
@@ -18,11 +18,11 @@ CONFIG += no_include_pwd
 OBJECTS_DIR = build
 MOC_DIR = build
 UI_DIR = build
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+#QMAKE_CXXFLAGS += -stdlib=libc++ -mmacosx-version-min=10.9
 # use: qmake "RELEASE=1"
 contains(RELEASE, 1) {
     # Mac: compile for maximum compatibility (10.5, 32-bit)
-    macx:QMAKE_CXXFLAGS += -mmacosx-version-min=10.5 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
+    # macx:QMAKE_CXXFLAGS +=  -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk
 
     !windows:!macx {
         # Linux: static link
@@ -295,23 +295,23 @@ isEmpty(BDB_LIB_SUFFIX) {
     macx:BDB_LIB_SUFFIX = -4.8
 }
 
-isEmpty(BDB_INCLUDE_PATH) {
-    macx:BDB_INCLUDE_PATH = /usr/local/include/db48
-}
+#isEmpty(BDB_INCLUDE_PATH) {
+#    macx:BDB_INCLUDE_PATH = /usr/local/include/db48
+#}
 
-isEmpty(BOOST_LIB_PATH) {
-    macx:BOOST_LIB_PATH = /usr/local/lib
-}
+#isEmpty(BOOST_LIB_PATH) {
+#    macx:BOOST_LIB_PATH = /usr/local/lib
+#}
 
 isEmpty(BOOST_INCLUDE_PATH) {
     macx:BOOST_INCLUDE_PATH = /usr/local/include
 }
 
 isEmpty(OPENSSL_INCLUDE_PATH) {
-    macx:OPENSSL_INCLUDE_PATH = /usr/local/opt/openssl/include
+    macx:OPENSSL_INCLUDE_PATH = /usr/local/Cellar/openssl/1.0.2l/include
 }
 isEmpty(OPENSSL_LIB_PATH) {
-    macx:OPENSSL_LIB_PATH = /usr/local/opt/openssl/lib
+    macx:OPENSSL_LIB_PATH = /usr/local/Cellar/openssl/1.0.2l/include
 }
 
 windows:LIBS += -lws2_32 -lshlwapi
@@ -340,6 +340,7 @@ macx:LIBS += -framework Foundation -framework ApplicationServices -framework App
 macx:DEFINES += MAC_OSX MSG_NOSIGNAL=0
 macx:ICON = src/qt/res/icons/ppcoin.icns
 macx:TARGET = "PPcoin-Qt"
+
 
 # Set libraries and includes at end, to use platform-defined defaults if not overridden
 INCLUDEPATH += $$BOOST_INCLUDE_PATH $$BDB_INCLUDE_PATH $$OPENSSL_INCLUDE_PATH $$QRENCODE_INCLUDE_PATH
