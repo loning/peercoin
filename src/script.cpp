@@ -1305,9 +1305,10 @@ bool Solver(const CScript& scriptPubKey, txnouttype& typeRet, vector<vector<unsi
             }
             else if (opcode2 == OP_SMALLDATA)
             {
+                // peercoin: size limitation removed, trusting the txn fee to prevent DoS attacks.
                 // small pushdata, <= 80 bytes
-                if (vch1.size() > 80)
-                    break;
+                //if (vch1.size() > 80)
+                //    break;
             }
             else if (opcode1 != opcode2 || vch1 != vch2)
             {
